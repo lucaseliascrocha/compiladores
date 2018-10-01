@@ -22,7 +22,9 @@ def proximo(estado_atual, simbolo):
 
     if (estado_atual == 1 or estado_atual == 3) and simbolo == 'E':
         return util.t_transicoes[estado_atual][util.dic['E']]
-    elif estado_atual == 7 and (not simbolo == '"') and (not simbolo == '\n'):
+    elif estado_atual == 7 and (not simbolo == '"'):
+        return util.t_transicoes[estado_atual][util.dic['C']]
+    elif estado_atual == 10 and (not simbolo == '}'):
         return util.t_transicoes[estado_atual][util.dic['C']]
     elif simbolo in util.digitos:
         return util.t_transicoes[estado_atual][util.dic['D']]
