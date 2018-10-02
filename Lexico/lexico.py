@@ -25,18 +25,16 @@ def proximo(estado_atual, simbolo):
 
     if (estado_atual == 1 or estado_atual == 3) and simbolo == 'E':
         return util.t_transicoes[estado_atual][util.dic['E']]
-    elif estado_atual == 7 and (not simbolo == '"'):
-        n_linha = n_linha + 1
-        n_coluna = 0
+    elif estado_atual == 7 and (not simbolo == '"') and (not simbolo == '\n'):
         return util.t_transicoes[estado_atual][util.dic['C']]
-    elif estado_atual == 10 and (not simbolo == '}'):
-        n_linha = n_linha + 1
-        n_coluna = 0
+    elif estado_atual == 10 and (not simbolo == '}') and (not simbolo == '\n'):
         return util.t_transicoes[estado_atual][util.dic['C']]
     elif simbolo in util.digitos:
         return util.t_transicoes[estado_atual][util.dic['D']]
     elif simbolo in util.letras:
         return util.t_transicoes[estado_atual][util.dic['L']]
+    elif simbolo not in util.dic.keys():
+        return util.t_transicoes[estado_atual][util.dic['&']]
     else:
         return util.t_transicoes[estado_atual][util.dic[simbolo]]
 
@@ -84,10 +82,9 @@ def lexema():
             else:
                 n_coluna = n_coluna + 1
         else:
-            if not simbolo == '\n':
-                lex = lex + simbolo
-            estado_atual = estado_prox
+            lex = lex + simbolo
             n_coluna = n_coluna + 1
+            estado_atual = estado_prox
 
 
 def main():
@@ -100,7 +97,7 @@ def main():
         if token['token'] == 'EOF':
             break
 
-    print('\n')
+    print('\nTabela de símbolos:')
     for i in util.t_simbolos:
         print(str(i) + ' : ' + str(util.t_simbolos[i]))
 
