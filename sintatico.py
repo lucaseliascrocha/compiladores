@@ -20,7 +20,7 @@ def erro():
         s = pilha.pop(-1)
         aux = False
         for A in util_sin.nao_terminal:
-            if not util_sin.t_analise[s][A] == -1:
+            if not util_sin.t_analise[s][A] == '-1':
                 aux = True
                 break
         if aux:
@@ -65,7 +65,7 @@ def main():
                 pilha.pop(-1)
 
             t = pilha[-1]
-            pilha.append(t_analise[t][A])
+            pilha.append(int(util_sin.t_analise[t][A]))
 
             print(A + ' -> ' + B)
 
@@ -74,7 +74,7 @@ def main():
 
         else:
             linha, coluna = lexico.get_l_c()
-            print("Erro Sintatico(" + linha + ',' + coluna + ').')
-            a = erro(regra)
+            print("Erro Sintatico(" + str(linha) + ',' + str(coluna) + ').')
+            a = erro()
 
 main()

@@ -66,29 +66,29 @@ t_simbolos = {
     'entao' : {'lexema':'entao','token':'entao','tipo':'-'},
     'fimse' : {'lexema':'fimse','token':'fimse','tipo':'-'},
     'fim' : {'lexema':'fim','token':'fim','tipo':'-'},
-    'inteiro' : {'lexema':'inteiro','token':'inteiro','tipo':'-'},
+    'inteiro' : {'lexema':'inteiro','token':'int','tipo':'-'},
     'lit' : {'lexema':'lit','token':'lit','tipo':'-'},
     'real' : {'lexema':'real','token':'real','tipo':'-'}
 }
 
 tokens = {
-    1: 'Num',
-    3: 'Num',
-    6: 'Num',
-    8: 'Literal',
+    1: 'num',
+    3: 'num',
+    6: 'num',
+    8: 'literal',
     9: 'id',
     11: 'Comentario',
     22: 'EOF',
-    12: 'OPR',
-    13: 'OPR',
-    14: 'OPR',
-    15: 'OPR',
-    16: 'OPR',
-    17: 'RCB',
-    18: 'OPM',
-    19: 'AB_P',
-    20: 'FC_P',
-    21: 'PT_V'
+    12: 'opr',
+    13: 'opr',
+    14: 'opr',
+    15: 'opr',
+    16: 'opr',
+    17: 'rcb',
+    18: 'opm',
+    19: ')',
+    20: '(',
+    21: ';'
 }
 
 estados_final = [1,3,6,8,9,11,12,13,14,15,16,17,18,19,20,21,22]

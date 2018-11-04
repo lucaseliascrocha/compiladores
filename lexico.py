@@ -7,14 +7,14 @@ n_coluna = 0
 
 def token(lexema, estado):
 
-    token = util.tokens[estado]
+    token = util_lex.tokens[estado]
     obj = {'lexema':lexema,'token':token,'tipo':'-'}
 
     if token == 'id':
-        if lexema not in util.t_simbolos.keys():
-            util.t_simbolos[lexema] = {'lexema':lexema,'token':token,'tipo':'-'}
+        if lexema not in util_lex.t_simbolos.keys():
+            util_lex.t_simbolos[lexema] = {'lexema':lexema,'token':token,'tipo':'-'}
         else:
-            obj = util.t_simbolos[lexema]
+            obj = util_lex.t_simbolos[lexema]
 
     return obj
 
@@ -24,26 +24,26 @@ def proximo(estado_atual, simbolo):
     global n_coluna
 
     if (estado_atual == 1 or estado_atual == 3) and simbolo == 'E':
-        return util.t_transicoes[estado_atual][util.dic['E']]
+        return util_lex.t_transicoes[estado_atual][util_lex.dic['E']]
     elif estado_atual == 7 and (not simbolo == '"') and (not simbolo == '\n'):
-        return util.t_transicoes[estado_atual][util.dic['C']]
+        return util_lex.t_transicoes[estado_atual][util_lex.dic['C']]
     elif estado_atual == 10 and (not simbolo == '}') and (not simbolo == '\n'):
-        return util.t_transicoes[estado_atual][util.dic['C']]
-    elif simbolo in util.digitos:
-        return util.t_transicoes[estado_atual][util.dic['D']]
-    elif simbolo in util.letras:
-        return util.t_transicoes[estado_atual][util.dic['L']]
-    elif simbolo not in util.dic.keys():
-        return util.t_transicoes[estado_atual][util.dic['&']]
+        return util_lex.t_transicoes[estado_atual][util_lex.dic['C']]
+    elif simbolo in util_lex.digitos:
+        return util_lex.t_transicoes[estado_atual][util_lex.dic['D']]
+    elif simbolo in util_lex.letras:
+        return util_lex.t_transicoes[estado_atual][util_lex.dic['L']]
+    elif simbolo not in util_lex.dic.keys():
+        return util_lex.t_transicoes[estado_atual][util_lex.dic['&']]
     else:
-        return util.t_transicoes[estado_atual][util.dic[simbolo]]
+        return util_lex.t_transicoes[estado_atual][util_lex.dic[simbolo]]
 
 def get_l_c():
     return n_linha, n_coluna
 
 def error(estado, n_linha, n_coluna):
     print('\nErro (' + str(n_linha+1) + ',' + str(n_coluna+1) +
-            '): ' + util.erros[estado])
+            '): ' + util_lex.erros[estado])
 
     return False
 
@@ -69,7 +69,7 @@ def lexema():
         #print("Prox estado: " + str(estado_prox))
 
         if estado_prox == -1:
-            if estado_atual in util.estados_final:
+            if estado_atual in util_lex.estados_final:
                 return token(lex, estado_atual)
             else:
                 return error(estado_atual, n_linha, n_coluna)
@@ -101,8 +101,8 @@ def main():
             break
 
     print('\nTabela de símbolos:')
-    for i in util.t_simbolos:
-        print(str(i) + ' : ' + str(util.t_simbolos[i]))
+    for i in util_lex.t_simbolos:
+        print(str(i) + ' : ' + str(util_lex.t_simbolos[i]))
 
 def analisador():
 
