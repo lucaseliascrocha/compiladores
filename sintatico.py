@@ -1,16 +1,16 @@
 import lexico
 from utils import util_sin
 
-def erro():
+def erro(a):
     global pilha
 
     #Indicando erro
     finais = 'Simbolos esperados: '
     s = pilha[-1]
-    for a in util_sin.terminal:
-        action = util_sin.t_analise[s][a]
+    for terminal in util_sin.terminal:
+        action = util_sin.t_analise[s][terminal]
         if not action == 'erro':
-            finais+= a + '   '
+            finais+= terminal + '   '
 
     print(finais)
 
@@ -28,12 +28,16 @@ def erro():
 
     while(True):
         s = pilha[-1]
-        a = lexico.analisador()
         if a == False:
             return a
         action = util_sin.t_analise[s][a['token']]
         if action[0] == 's' or action[0] == 'r':
             return a
+        elif a['token'] == '$':
+            print('Erro sintatico invalida toda analise sintatica.')
+            import sys
+            sys.exit()
+        a = lexico.analisador()
 
 
 pilha = []
@@ -69,12 +73,12 @@ def main():
 
             print(A + ' -> ' + B)
 
-        elif action[0] == 'acc':
+        elif action == 'acc':
             break
 
         else:
             linha, coluna = lexico.get_l_c()
-            print("Erro Sintatico(" + str(linha) + ',' + str(coluna) + ').')
-            a = erro()
+            print("Erro Sintatico(linha: " + str(linha) + ')')
+            a = erro(a)
 
 main()
