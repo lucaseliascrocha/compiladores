@@ -17,6 +17,8 @@ def erro():
     while(True):
         s = pilha[-1]
         a = lexico.analisador()
+        if a == False:
+            return a
         action = util_sin.t_analise[s][a['token']]
         if action[0] == 'S' or action[0] == 'R':
             return a
@@ -27,9 +29,13 @@ def main():
     global pilha
 
     a = lexico.analisador()
+
     pilha.append(0)
     regra = util_sin.gramatica[0]
+
     while (True):
+        if a == False:
+            break
         s = pilha[-1]
         action = util_sin.t_analise[s][a['token']]
 

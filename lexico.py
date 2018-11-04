@@ -104,4 +104,9 @@ def main():
     for i in util.t_simbolos:
         print(str(i) + ' : ' + str(util.t_simbolos[i]))
 
-main()
+def analisador():
+
+    token = lexema()
+    if token['token'] == 'EOF':
+        return {'lexema':'$','token':'$','tipo':'-'}
+    return token
