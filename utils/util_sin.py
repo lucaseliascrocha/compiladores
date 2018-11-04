@@ -213,3 +213,4 @@ gramatica = [
 ]
 
 nao_terminal = ['P','V','LV','D','TIPO','A','ES','ARG','CMD','LD','OPRD','COND','CABECALHO','EXP_R','CORPO']
+terminal = ['inicio','varinicio','varfim','id','int','real','lit','leia','escreva','literal','num','se','(',')','entao','opm','opr','rcb',';','fimse','fim','$']

@@ -4,6 +4,18 @@ from utils import util_sin
 def erro():
     global pilha
 
+    #Indicando erro
+    finais = 'Simbolos esperados: '
+    s = pilha[-1]
+    for a in util_sin.terminal:
+        action = util_sin.t_analise[s][a]
+        if not action == 'erro':
+            finais+= a + '   '
+
+    print(finais)
+
+
+    # Tratando o erro
     while(True):
         s = pilha.pop(-1)
         aux = False
@@ -20,7 +32,7 @@ def erro():
         if a == False:
             return a
         action = util_sin.t_analise[s][a['token']]
-        if action[0] == 'S' or action[0] == 'R':
+        if action[0] == 's' or action[0] == 'r':
             return a
 
 
@@ -39,12 +51,12 @@ def main():
         s = pilha[-1]
         action = util_sin.t_analise[s][a['token']]
 
-        if action[0] == 'S':
-            pilha.append(int(action[1]))
+        if action[0] == 's':
+            pilha.append(int(action[1:]))
             a = lexico.analisador()
 
-        elif action[0] == 'R':
-            regra = util_sin.gramatica[int(action[1])-1]
+        elif action[0] == 'r':
+            regra = util_sin.gramatica[int(action[1:])-1]
             A = regra['A']
             B = regra['B']
             modulo_B = len(B.split())
@@ -64,3 +76,5 @@ def main():
             linha, coluna = lexico.get_l_c()
             print("Erro Sintatico(" + linha + ',' + coluna + ').')
             a = erro(regra)
+
+main()
