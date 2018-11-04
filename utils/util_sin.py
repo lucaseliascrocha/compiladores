@@ -176,7 +176,7 @@ t_analise = [
 
 # estado 58 #
 {'inicio':'erro','varinicio':'erro','varfim':'erro','id':'erro','int':'erro','real':'erro','lit':'erro','leia':'erro','escreva':'erro','literal':'erro','num':'erro','se':'erro','(':'erro',')':'erro','entao':'erro','opm':'erro','opr':'erro','rcb':'erro',';':'erro','fimse':'erro','fim':'erro','$':'r22','P':,'V':,'LV':,'D':,'TIPO':,'A':,'ES':,'ARG':,'CMD':,'LD':,'OPRD':,'COND':,'CABECALHO':,'EXP_R':,'CORPO':}
- 
+
 ]
 
 gramatica = [
@@ -211,3 +211,5 @@ gramatica = [
 {'A':'CORPO','B':'fimse'},
 {'A':'A','B':'fim'}
 ]
+
+nao_terminal = ['P','V','LV','D','TIPO','A','ES','ARG','CMD','LD','OPRD','COND','CABECALHO','EXP_R','CORPO']

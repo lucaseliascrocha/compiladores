@@ -1,4 +1,4 @@
-import util
+from utils import util_lex
 
 file = open('fonte.txt', 'r')
 fonte = file.readlines()
@@ -37,6 +37,9 @@ def proximo(estado_atual, simbolo):
         return util.t_transicoes[estado_atual][util.dic['&']]
     else:
         return util.t_transicoes[estado_atual][util.dic[simbolo]]
+
+def get_l_c():
+    return n_linha, n_coluna
 
 def error(estado, n_linha, n_coluna):
     print('\nErro (' + str(n_linha+1) + ',' + str(n_coluna+1) +
