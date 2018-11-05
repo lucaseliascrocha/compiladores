@@ -38,8 +38,8 @@ def proximo(estado_atual, simbolo):
     else:
         return util_lex.t_transicoes[estado_atual][util_lex.dic[simbolo]]
 
-def get_l_c():
-    return n_linha, n_coluna
+def get_l():
+    return n_linha
 
 def error(estado, n_linha, n_coluna):
     print('\nErro (' + str(n_linha+1) + ',' + str(n_coluna+1) +

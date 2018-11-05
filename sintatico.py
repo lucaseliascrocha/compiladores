@@ -47,7 +47,6 @@ def main():
     a = lexico.analisador()
 
     pilha.append(0)
-    regra = util_sin.gramatica[0]
 
     while (True):
         if a == False:
@@ -77,7 +76,7 @@ def main():
             break
 
         else:
-            linha, coluna = lexico.get_l_c()
+            linha = lexico.get_l()
             print("Erro Sintatico(linha: " + str(linha) + ')')
             a = erro(a)
 
