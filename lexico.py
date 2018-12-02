@@ -110,3 +110,12 @@ def analisador():
     if token['token'] == 'EOF':
         return {'lexema':'$','token':'$','tipo':'-'}
     return token
+
+def atribuicao_tipo(lexema, tipo):
+    util_lex.t_simbolos[lexema]['tipo'] = tipo
+
+def id_declarado(lexema):
+    if lexema in util_lex.t_simbolos.keys():
+        if not util_lex.t_simbolos[lexema] == '-':
+            return True
+    return False

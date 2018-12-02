@@ -66,9 +66,9 @@ t_simbolos = {
     'entao' : {'lexema':'entao','token':'entao','tipo':'-'},
     'fimse' : {'lexema':'fimse','token':'fimse','tipo':'-'},
     'fim' : {'lexema':'fim','token':'fim','tipo':'-'},
-    'inteiro' : {'lexema':'inteiro','token':'int','tipo':'-'},
-    'lit' : {'lexema':'lit','token':'lit','tipo':'-'},
-    'real' : {'lexema':'real','token':'real','tipo':'-'}
+    'inteiro' : {'lexema':'inteiro','token':'int','tipo':'int'},
+    'lit' : {'lexema':'lit','token':'lit','tipo':'lit'},
+    'real' : {'lexema':'real','token':'real','tipo':'real'}
 }
 
 tokens = {
