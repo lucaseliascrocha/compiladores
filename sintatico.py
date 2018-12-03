@@ -79,6 +79,7 @@ def main():
             t = pilha[-1]
             pilha.append(int(util_sin.t_analise[t][A]))
 
+            print('-----------------------------------------\n')
             print(A + ' -> ' + B)
             semantico(int(action[1:]), A, modulo_B)
 
@@ -95,8 +96,10 @@ def main():
 
 Tx_18 = 0
 Tx_25 = 0
+erros_semanticos = 0
 def semantico(regra, A, modulo_B):
     global pilha_sem
+    global erros_semanticos
 
     regra_sem = util_sem.regras_sem[regra-1]
     print ('Regra Semântica: '+ regra_sem + '\n')
@@ -115,7 +118,6 @@ def semantico(regra, A, modulo_B):
             aux = pilha_sem.pop(-1)
             simbolos[aux['token']] = aux
 
-    print('Simbolos D.: ' + str(simbolos))
     S = {'token': A}
 
     if regra == 5:
@@ -146,7 +148,8 @@ def semantico(regra, A, modulo_B):
             elif id['tipo'] == 'real':
                 escritor.scanf('lf', id['lexema'])
         else:
-            print('\nErro: Variável não declarada.\n')
+            print('\n-->Erro: Variável não declarada.\n')
+            erros_semanticos += 1
 
     elif regra == 12:
         ARG = simbolos['ARG']
@@ -155,7 +158,7 @@ def semantico(regra, A, modulo_B):
     elif regra == 13:
         literal = simbolos['literal']
         S['lexema'] = literal['lexema']
-        S['tipo'] = 'lit'
+        S['tipo'] = 'litetal'
     elif regra == 14:
         num = simbolos['num']
         S['lexema'] = num['lexema']
@@ -167,7 +170,8 @@ def semantico(regra, A, modulo_B):
             S['lexema'] = id['lexema']
             S['tipo'] = id['tipo']
         else:
-            print('\nErro: Variável não declarada.\n')
+            print('\n-->Erro: Variável não declarada.\n')
+            erros_semanticos += 1
 
     elif regra == 17:
         id = simbolos['id']
@@ -178,26 +182,32 @@ def semantico(regra, A, modulo_B):
                 rcb['tipo'] = '='
                 escritor.rcb(id['lexema'],rcb['tipo'],LD['lexema'])
             else:
-                print('\nErro: Tipos diferentes para atribuição.\n')
+                print('\n-->Erro: Tipos diferentes para atribuição.\n')
+                erros_semanticos += 1
         else:
-            print('\nErro: Variável não declarada.\n')
+            print('\n-->Erro: Variável não declarada.\n')
+            erros_semanticos += 1
 
     elif regra == 18:
         global Tx_18
+        Tx = 'T' + str(Tx_18)
 
         OPRD1 = simbolos['OPRD1']
         OPRD2 = simbolos['OPRD2']
-        tipos_equivalentes = ['num', 'int', 'real']
+        tipos_equivalentes = ['num','real','int']
         if OPRD1['tipo'] in tipos_equivalentes and OPRD2['tipo'] in tipos_equivalentes:
-            Tx = 'T' + str(Tx_18)
             S['lexema'] = Tx
             S['tipo'] = 'int'
+
             Tx_18 += 1
 
             opm = simbolos['opm']
             escritor.opm(Tx, OPRD1['lexema'], opm['lexema'], OPRD2['lexema'])
         else:
-            print('\nErro: Operandos com tipos incompatíveis.\n')
+            S['lexema'] = Tx
+            S['tipo'] = 'num'
+            print('\n-->Erro: Operandos com tipos incompatíveis.\n')
+            erros_semanticos += 1
 
     elif regra == 19:
         OPRD = simbolos['OPRD']
@@ -210,7 +220,8 @@ def semantico(regra, A, modulo_B):
             S['lexema'] = id['lexema']
             S['tipo'] = id['tipo']
         else:
-            print('\nErro: Variável não declarada.\n')
+            print('\n-->Erro: Variável não declarada.\n')
+            erros_semanticos += 1
 
     elif regra == 21:
         num = simbolos['num']
@@ -240,9 +251,13 @@ def semantico(regra, A, modulo_B):
             escritor.opr(Tx, OPRD1['lexema'], opr['lexema'], OPRD2['lexema'])
 
         else:
-            print('\nErro: Operandos com tipos incompatíveis.\n')
+            print('\n-->Erro: Operandos com tipos incompatíveis.\n')
+            erros_semanticos += 1
 
     pilha_sem.append(S)
 
 
 main()
+print('\nErros: ' + str(erros_semanticos))
+escritor.close_file()
+escritor.cabecalho(Tx_18, Tx_25)
